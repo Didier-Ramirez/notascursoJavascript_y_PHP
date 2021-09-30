@@ -152,7 +152,8 @@ console.log(boolean1);
 console.log(boolean2);
 
 /*-------------------------------------------------------------------------------------------------------------------- */
-/* OBJETOS (Lo que más se utiliza en JavaScript y seria la parte central)  */
+/* OBJETOS (Lo que más se utiliza en JavaScript y seria la parte central)  
+Los objetos se crean con {llaves}   */
 
 //Objeto, puede tener n cantidad de variables dentro del objeto, esta es su sintaxis.
 const producto = {
@@ -209,16 +210,322 @@ console.log(precio);
 console.log(nombreProducto);
 
 /*-------------------------------------------------------------------------------------------------------------------- */
-/*OBJECT METHODS */
+/*OBJECT METHODS 
+Para prevenir que un objeto sea modificado se utiliza la siguiente funcion*/
+
+"use strint";  //Ejecuta el codigo JS de forma estricta para seguir las buenas practicas
+
+const producto = {
+    nombreProducto : 'smartwach HW12',
+    precio : 425,
+    disponible : true
+}
+
+Object.freeze(producto); //Congela para que no se puede agregar mas propiedades ni modificar el objeto, ni eliminar las propiedades
+producto.imagen = 'imagen.jpg';
+//console.log(Object.isFrozen(producto));
+console.log(producto);
+
+
+Object.seal(producto); //No permite agregar, eliminar pero si permite modificar los existentes a direrencia de freeze
+producto.precio = 400;
+
+console.log(producto);
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/*UNIR DOS OBJETOS CON EL SPREAD OPERATOR
+NOTA: cuando unes dos objetos es importante no modificar ninguno de los dos*/
+
+const producto = {
+  nombreProducto : 'smartwach HW12',
+  precio : 425,
+  disponible : true
+}
+
+const productodetalle = {
+  serie : 'ip6',
+  color : 'blanco',
+  tamaño : '44 mm',
+}
+
+//Las buenas practicas es no modificar los datos originales
+const unionproductos = {...producto, ...productodetalle};  //los tres puntos ... representa el Spread Operator para unir los dos objetos.
+
+console.log(producto);
+console.log(productodetalle);
+
+console.log(unionproductos); //muestra la union de los dos objetos con el Spread Operator
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+/*ARRAYS - arreglos
+los arreglos al igual que los objetos forman parte importante en cualquier lenguaje de programación
+EJEMPLO DE ARRAYS; un carrito de compras, sirven para agrupar elementos del mismo tipo o relacionados
+Los arreglos se crean con [corchetes]*/
+
+const productosreloj = ['HW12', 'w26 plus', 'HW16', 'HW22 plus'];
+//const productos = new Array('HW12', 'w26 plus', 'HW16', 'HW22 plus'); //Otra forma que se utiliza o utilizaba para crear los arrays
+
+//NOTA; En los arrays se puede almacenar todo tipo de datos, ejemplo
+
+const arreglocompletoproductos = [
+                                  "Smartwach", 'relojes analogos', 'auriculares', 'baterias',
+                                  10, 30, 22, 12, 63,
+                                  true, false, null, 
+                                  {objetprueba : 'objeto dentro de un array', modelo : "HW12", serie: 'ip 6', precio: 425},
+                                  [2, 5, 32, 'array dentro de un array']
+                                 ]; //dentro del array almacenamos varios tipos de datos con esta sintaxis.
+
+//console.table(productosreloj);  //el .table  imprime en forma de tabla
+
+console.table(arreglocompletoproductos);
+
+//Acceder a los valores de un arreglo
+console.log(arreglocompletoproductos[3]);
+console.log(arreglocompletoproductos[13]); //lo que va dentro del [] es el numero de indice que se muestra en la tabla de la consola o sea la posicion 
+
+
+//Conocer la extensión de un arreglo
+console.log(arreglocompletoproductos.length);  
+
+//Recorrer arreglos, muestra todo lo que contiene el array con la siguiente sintaxis
+//EJEMPLO EN LA VIDA REAL; no puede servir para hacer un recorrido en un carrito de compras y que muestre todo lo que se agrego al arreglo (se agrego al carrito)
+arreglocompletoproductos.forEach(function(arreglocompleto) {  //forEach se encarga de hacer el recorrido en JS, se ejecuta una vez por cada elemento en el arreglo
+    console.log(arreglocompleto)
+});
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* METOS PARA LOS ARRAYS
+   Son muy eficinetes por ejemplo en un carrito de compras, se pueden agragar o eliminar datos del arreglo */
+
+   const productosreloj = ['HW12', 'w26 plus', 'HW16', 'HW22 plus'];
+//const productos = new Array('HW12', 'w26 plus', 'HW16', 'HW22 plus'); //Otra forma que se utiliza o utilizaba para crear los arrays
+
+//NOTA; En los arrays se puede almacenar todo tipo de datos, ejemplo
+
+
+//Push Agrega un elemento al final del arreglo, con este metodo push se modifica el arreglo original (No es una buena practica)
+productosreloj.push('smartwach L11', 'Se pueden agregar mas valores en el mismo metodo');
+
+// unshift Agrega un elemento al inicio del arreglo, con este metodo unshift se modifica el arreglo original (No es una buena practica)
+productosreloj.unshift('smartwach k33');
+
+// Pop elimina el último elemento del arreglo
+productosreloj.pop();   //Si no le damos un valor adentro de pop elimina el ultimo registro del arreglo
+productosreloj.shift();  //Si no le damos un valor adentro de pop elimina el primer registro del arreglo
+productosreloj.splice(3,1);  // el 3 es el indice del arreglo (valor 4), el 1 la cantidad de registros que va eliminar apartir del indice indicado
+
+console.table(productosreloj);
+
+/*NOTA; una buena practica es crear un nuevo objeto para modificarlo, sin modificar los datos originales del objeto,
+se utiliza mucho en la actualidad  que serian;
+Rest Operator o Sread Operator*/
+
+const nuevoproductosreloj = ['nuevo producto modificado al inicio', ...productosreloj, 'nuevo producto modificado al final'];  //los 3 puntos ... significan copiar lo siguiente, agrega al final del arreglo
+//Para simular el push; [...productosreloj, 'nuevo producto'];
+//Para simular el unshift; ['nuevo producto', ...productosreloj];
+//En el ejemplo agrege 2 valores, uno al inicio y uno al final del nuevo arreglo.
+
+
+console.table(nuevoproductosreloj);
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/*MAS METODOS DE ARRAYS
+En JavaScritp se puede tener una rreglo de objetos, por ejemplo para un carrito de compras */
+
+const productosreloj = ['HW12', 'w26 plus', 'HW16', 'HW22 plus'];
+//const productos = new Array('HW12', 'w26 plus', 'HW16', 'HW22 plus'); //Otra forma que se utiliza o utilizaba para crear los arrays
+
+
+//Arreglo de objetos, cada producto es un objeto dentro del arreglo
+const carrito = [
+    {nombre: 'smartwach hw12', precio: 425},
+    {nombre: 'smartwach w26 plus', precio: 375},
+    {nombre: 'smartwach L11', precio: 400},
+    {nombre: 'smartwach HW22', precio: 400},
+    {nombre: 'smartwach W33', precio: 500},
+    {nombre: 'smartwach X33', precio: 125},
+];
+
+/*forEach  se va ejecutar una vez por cada elemento que haye en el arreglo, NOTA; nos va servir para arreglos planos como el 
+ejemplo de productosreloj*/
+
+productosreloj.forEach(function(productosrel) //(va mostrar todos los elementos del arreglo)
+{
+console.table(productosrel);
+});  
+
+//Si queremos imprimir solo un producto del arreglo usamos una estructura de control
+productosreloj.forEach(function(productorelojs){
+if(productorelojs == 'HW16'){
+    console.log('HW 16 si existe');
+} 
+});
+
+/*Tambien podemos usar el metodo Includes que es igual al de forEach, NOTA; nos va servir para arreglos planos como el 
+ejemplo de productosreloj*/
+const resultado = productosreloj.includes('HW12');
+console.table(resultado);  //va imprimir true si existe y false si no exite.
+
+
+/* El metodo .some es ideal para arrego de objetos, por ejemplo el arreglo de carrito */
+const resultado2 = carrito.some(function(productocarrito){
+    return productocarrito.nombre === 'smartwach W33'
+});
+console.table(resultado2);  //va imprimir true si existe y false si no exite.
+
+/*El metodo .reduce va tomar todos los valores de precio, los suma e imprime el resultado del total */
+resultado3 = carrito.reduce(function(total, producto){
+    return total + producto.precio
+}, 0); // , 0);  esta indicando que inicie a sumar en el indice 0
+console.table(resultado3);
+
+/*El metodo .filter es el más util de todos los anteriores, sirve para obtener por ejemplo; todos los 
+productos > productoX  o < productoX,  entre otros producto */
+resultado4 = carrito.filter(function(productofil){
+    return productofil.precio > 400
+});
+
+resultado5 = carrito.filter(function(productofilt){
+    return productofilt.nombre === 'smartwach X33'  // === imprime todos los que son 'smartwach X33'   con !== imprime todos los que no son 'smartwach X33'
+});
+console.table(resultado4);
+console.table(resultado5);
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/*FUNCIONES EN JAVASCRIPT, Las funciones en cada lenguaje de programación son una serie de procedimientos
+o instrucciones que realizan una acción, una ventaja de las funciones es que permiten tener un codigo mas ordenado
+y más facil de mantener y otra ventaja es que son reutilizables, se puede tener una función que valide un formulario
+y utiliarla en todos los formularios , tambien tener una funcion que envie datos a un servidor y reutilizalar multiples veces.
+
+Existen 3 formas de crear funciones, declaración de la función, expresión de la función y por ultimo lo que se conoce como iife*/
+
+
+//Declaración de función
+function sumar(){   //inicia con palabra reservada function, seguida del nombre, en el parentisis van los argumentos de la función
+  console.log(10 +10);  //cuerpo de la función 
+};
+sumar();  //se llama la función.
+
+//Expresión de la función
+const sumar2 = function(){
+  console.log( 3 * 3);
+};
+sumar2();
+
+//IIFE
+/*Esta funcion se manda llamar ella misma al final con ()      --No se recomienda reulizarse porque mas que todo sirven para 
+proteger las variables que no se mezclen con otro archivo */
+(function(){
+  console.log('Esto es una función');
+}) (); // los () manda a llamar a la función
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* PREGUNTA PARA OBTENER TRABAJO DE DASARROLLADOR WEB
+JavaScript se ejecuta en 2 vueltas, en la primera se registran todas las funciones y despues se registran los llamados a 
+las funciones.
+La primera etapa se le conoce como; de CREACION (o registro), ahi se registran las funciones y las variables
+La segunda etapa se le conoce como; de EJECUCION, en esa se manda a llamar el codigo.*/
+
+sumar();  //se llama la función y no da error porque la lee en la segunda etapa
+function sumar(){   //inicia con palabra reservada function, seguida del nombre, en el parentisis van los argumentos de la función
+  console.log(10 +10);  //cuerpo de la función 
+};
+
+
+sumar2();  // la imprime como no definida, ya que JS lo toma como una variable.
+//Expresión de la función
+const sumar2 = function(){
+  console.log( 3 * 3);
+};
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* DIFERENCIA DE UN METODO Y UNA FUNCION
+   - Si esta despues de la función seguidos de un parentesis, ejemplo (parseInt(numero2);   son FUNCIONES
+   - Si esta despues de una variable o un objeto seguido de un punto ejemplo  numero.toString()  eso es un METODO    */
+
+const numero1 = 20;
+const numero2 = '20';
+
+console.log(parseInt(numero2));  // parseIn()   es una función y convierte el '20' de string a dato numerico
+console.log(numero1.toString()); //Este metodo convierte el dato numerico a string
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* FUNCIONES CON PARAMETROS Y ARGUMENTOS*/
+
+
+//Declaración de función
+//En el caso que no se llamen todos los parametros, se utiliza un parametro por defaul para que de error, ejemplo: 
+// sumar(numero1 = 0, numero2 = 0)     con eso evitamos el error a la hora que no usemos todos los parametros
+function sumar(numero1 = 0, numero2 = 0){   //numero1 y numero2 son parametros.  Los parametros actuan como variables dentro de las funciones
+  console.log(numero1 + numero2);  //
+};
+sumar(2, 2);  // Argumentos o valores reales (dentro de los parentesis)
+sumar(4, ); //ejemplo que no llamemos todos los parametros.
+sumar(3,8);
+
+
+
+
+//Expresión de la función
+const sumar2 = function(num1, num2){
+  console.log( num1 * num2);
+};
+sumar2(4, 4);
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* FUNCIONES QUE RETORNAN VALORES
+   Para despues procesarlo o hacer algo mas con ese valor   */
+
+   function sumar(num1, num2){
+    return num1 + num2;
+}
+const resultado = sumar(2, 4);
+//console.log(resultado);
+
+//ejemplo de carrito 
+
+let total = 0;
+
+function agregarcarrito(precio){
+    return total += precio;
+}
+
+function calcularImpuesto(total){
+    return 1.15 * total;
+}
+
+total = agregarcarrito(200);
+total = agregarcarrito(400);
+total = agregarcarrito(600);
+
+console.log(`Total productos: Q${total}`);
+
+const totalApagar = calcularImpuesto(total);
+
+console.log(`El total a pagar con impuestos es de: Q${totalApagar}`);
+
 
 /*-------------------------------------------------------------------------------------------------------------------- */
 /* */
 
-/*-------------------------------------------------------------------------------------------------------------------- */
-/* */
 
 /*-------------------------------------------------------------------------------------------------------------------- */
 /* */
+
 
 
 /*-------------------------------------------------------------------------------------------------------------------- */
