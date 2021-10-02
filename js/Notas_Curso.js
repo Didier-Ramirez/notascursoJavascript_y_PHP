@@ -520,17 +520,239 @@ console.log(`El total a pagar con impuestos es de: Q${totalApagar}`);
 
 
 /*-------------------------------------------------------------------------------------------------------------------- */
-/* */
+/* METODOS DE PROPIEDAD
+   tienen la sintaxis de un metodo, pero Siguen siendo funciones, llega a ser muy comunes porque mantienen toda
+   la infomacion en un solo objeto, cuando creas un proyecto grande tienden a ser un buena opcion para estructurar un 
+   proyecto */
+
+   //metodo de propiedad
+
+//Ejemplo de reproducto de musica 
+
+const reproductor = {
+  reproducir : function(id){
+      console.log(`Reproduciendo canción con id: ${id}`);
+  },
+pausar : function(){  //se pueden agregar mas funciones al metodo de propiedad
+  console.log(`Pausando...`);
+},
+
+crearPlayList : function(nombre){
+  console.log(`Creando la PlayList : ${nombre}`);
+},
+
+agregarCancion : function(cancion){
+  console.log(`Se agrego la canción: ${cancion}`);
+}
+
+}
+
+reproductor.borrarCancion = function(id){  //Se pueden agregar mas funciones fuera del objeto
+  console.log(`Eliminando la cancion No. ${20}`);
+}
+
+reproductor.reproduciendoPlaylist = function(playlist){
+  console.log(`Reproduciendo la playlist: ${playlist}`)
+}
+
+reproductor.reproducir(123);  //le pasamos el parametro id
+reproductor.pausar();
+reproductor.borrarCancion();
+reproductor.crearPlayList('Rock Chapin');
+reproductor.agregarCancion('El norte - R. Andrade');
+reproductor.reproduciendoPlaylist('Rock Chapin');
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* ARROW FUNCTIONS - funciones de flecha
+      */
+
+const sumar2 = (num1, num2) => console.log(num1 + num2); // el arrow funtion hace mas pequeña la funcion
+sumar2(2, 3);
+
+
+const aprendiendo = tecnologia => console.log(`Aprendiendo ${tecnologia}`);
+aprendiendo('JavaScript');  //el signo => sustituye el funtion()
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* ESTRUCTURAS DE CONTROL 
+    */
+
+/*NOTA: el signo = significa que se esta asignando
+                 == significa que esta comparando el dato o valor
+                 === significa que va comparar el valor y el tipo de dato (es mas estricto que el ==)
+                 !== significa que sea diferente a...
+                 < menor que, > mayor que, =>   o =<
+                */
+                 const puntaje = 100;
+
+                 if(puntaje == 100){
+                     console.log(`Si, el puntaje es igual a: ${100}`);
+                 }else {
+                     console.log('El puntaje es incorrecto');
+                 };
+                 
+                 //ejemplo de carrito
+                 
+                 const efectivo = 1000;
+                 const carrito = 7100;
+                 
+                 if(efectivo > carrito){
+                     console.log('El cliente si puede pagar!!');
+                 } else {
+                     console.log('El cliente no puede pagar :(  ');
+                 }
+                 
+                 //EJEMPLO DE CONDICION ELSE IF
+                 const rol = 'ADMINISTRADOR';  //Le asignamos el valor a rol, puede ser editor o de otra area para este ejemplo
+                 
+                 if( rol === 'ADMINISTRADOR'){
+                     console.log('Eres Administrador, acceso permitido.');
+                 }
+                 else if(rol === 'EDITOR'){
+                     console.log('Eres editor, solo puedes editar en el sistema');
+                 } else{
+                     console.log('Acceso denegado!!');
+                 }
+                 
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* SWICH
+  para multiples opciones, si solo hay una o 2 opciones es mejor usar un if
+  pero si va ser de opcion multiple se recomienda usar el swich  */
+
+  const metodoPago = 'efectivo';   //podria ser otro metodo del swich
+
+switch(metodoPago){
+    case 'tarjeta':
+        console.log('Pagaste con tarjeta!! :)');
+        break;
+
+    case 'efectivo':
+        console.log('Pago contra entrega en efectivo!!');
+        break;
+
+    case 'transferencia':
+        console.log('Realizaste tu transferencia');
+        break;
+
+    case 'cheque':
+        console.log('Se verificaran los fondos del cheque');
+        break;
+
+ default:
+    console.log('No has realizado el pago!!');
+  break;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+
+/* ITERADORES
+
+// FOR LOOP  va ir ejecutando un codigo mientras una condicion sea evaluada como verdadera y
+// deja de ejecutar esa codigo cuando esa condicion se deja de cumplir.  SON MUY UTILES EN LOS ARREGLOS
+   FOR LOOP
+   los for son exelente forma de iterar sobre un arreglo, ejemplo un carrito de ecomers */
+
+
+   for(let i = 0; i < 10; i++){
+    console.log(`i ++ = ${i}`);
+}
+
+//EJERCICIO DE PRUEBA PARA TRABAJO DE DESARROLLADOR
+//mostrar los numeros pares del 1 al 10
+
+
+for(i = 1; i <= 10; i ++){
+    if(i % 2 === 0){  //usamos el modulo % lo que hace es evaluar el residuo, si el residuo es 0, el numero es par.
+        console.log(`El número ${i} es par.`);
+    }
+    else{
+            console.log(`El número ${i} es impar.`);
+        }
+} 
+
+//EJEMPLO LISTAR LOS PRODUCTOS DE UN CARRITO CON UN FOR
+
+const carrito = [
+    {nombre: 'SmartWach HW12', precio: 425},
+    {nombre: 'SmartWach HW22 plus', precio: 500},
+    {nombre: 'SmartWach W26 plus', precio: 375},
+    {nombre: 'SmartWach GW33', precio: 500},
+    {nombre: 'SmartWach HW16', precio: 400},
+    {nombre: 'Auriculares pro3', precio: 250},
+    {nombre: 'bocina x6', precio: 200},
+];
+
+for (i = 0; carrito.length; i ++){   // el .length va recorrer desde la posicion 0 hasta la ultima posicion de lo que tenga el carrito
+console.log(carrito[i].nombre);
+};
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* WHILE Y DO WHILE
+  Es muy similar al for, la sintaxis es un poco diferente, el while se ejecuta cuando una condicion
+  sea evaluada como verdadera */
+
+//While loop
+//NOTA; en el while, primero va revisar si se cumple la condición  y despues va ejecutar el código  (se tiene que complir la condición)
+
+let i = 1;  // indice
+
+while(i <= 10){  //
+  if(i % 2 === 0){
+    console.log(`El número ${i} es PAR`);
+                 } else{
+                        console.log(`El número ${i} es IMPAR`)
+                       }
+
+    i++; // incremento
+};
+
+// DO WHILE
+// NOTA; en el do while se ejecuta el código al menos una vez (aunque la condición no se cumpla)
+// y despues evalua si la condición se cumple.
+let i = 100;
+
+do{
+ console.log(i);
+
+ i ++;
+}while(i < 10);
 
 
 /*-------------------------------------------------------------------------------------------------------------------- */
+
 /* */
 
 
 
 /*-------------------------------------------------------------------------------------------------------------------- */
+
 /* */
+
 
 
 /*-------------------------------------------------------------------------------------------------------------------- */
+
 /* */
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* */
+
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------- */
+
+/* */
+
+
+
+
